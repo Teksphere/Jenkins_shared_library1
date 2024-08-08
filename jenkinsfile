@@ -54,15 +54,15 @@ pipeline{
                 script{
                    withDockerRegistry(credentialsId: 'docker', toolName: 'docker'){
                        sh "docker build --build-arg REACT_APP_RAPID_API_KEY=f0ead79813ms -t youtube ."
-                       sh "docker tag youtube sevenajay/youtube:latest "
-                       sh "docker push sevenajay/youtube:latest "
+                       sh "docker tag youtube teksphere/youtube:latest "
+                       sh "docker push teksphere/youtube:latest "
                     }
                 }
             }
         }
         stage("TRIVY"){
             steps{
-                sh "trivy image sevenajay/youtube:latest > trivyimage.txt"
+                sh "trivy image teksphere/youtube:latest > trivyimage.txt"
             }
         }
         stage('Deploy to container'){
