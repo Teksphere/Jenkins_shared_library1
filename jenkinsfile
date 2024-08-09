@@ -67,7 +67,7 @@ pipeline{
         }
         stage('Deploy to container'){
             steps{
-                sh 'docker run -d --name youtube1 -p 3000:3000 sevenajay/youtube:latest'
+                sh 'docker run -d --name youtube1 -p 3000:3000 teksphere/youtube:latest'
             }
         }
         stage('Deploy to kubernets'){
@@ -84,7 +84,7 @@ pipeline{
     always {
         echo 'Slack Notifications'
         slackSend (
-            channel: '#channel name',   #change your channel name
+            channel: '#jenkins-youtube',
             color: COLOR_MAP[currentBuild.currentResult],
             message: "*${currentBuild.currentResult}:* Job ${env.JOB_NAME} \n build ${env.BUILD_NUMBER} \n More info at: ${env.BUILD_URL}"
         )
